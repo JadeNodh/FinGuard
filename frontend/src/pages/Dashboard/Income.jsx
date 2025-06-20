@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../componets/layouts/DashboardLayout'
 import IncomeOverview from '../../componets/Income/IncomeOverview';
+import Modal from '../../componets/Modal';
+import AddIncomeForm from '../../componets/Income/AddIncomeForm';
 
 const Income = () => {
 
@@ -45,6 +47,13 @@ const Income = () => {
   // handle download income details
   const handleDownloadIncomeDetails = async () => {};
 
+  useEffect(() => {
+    fetchIncomeDetails();
+
+    return () => {
+      
+    }
+  }, [])
 
   return (
   <DashboardLayout activeMenu="Income">
@@ -57,6 +66,15 @@ const Income = () => {
             />
           </div>
         </div>
+
+        <Modal
+          isOpen={openAddIncomeModal}
+          //onClose{()=> setOpenAddIncomeModal(false)}
+          title="Add Income"
+        >
+         <AddIncomeForm onAddIncome={handleAddIncome}/>
+
+        </Modal>
       </div>
   </DashboardLayout>
   )
